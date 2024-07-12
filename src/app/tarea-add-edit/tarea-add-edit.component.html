@@ -1,0 +1,60 @@
+<div mat-dialog-title>
+  <h1>Employee Form</h1>
+</div>
+<form [formGroup]="tareaForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+      <div class="row">
+          <mat-form-field appearance="outline">
+              <mat-label>Nombre Tarea</mat-label>
+              <input required matInput type="text" placeholder="Realizar un crud" formControlName="nombre">
+          </mat-form-field>
+          
+          <mat-form-field appearance="outline">
+            <mat-label>Empleado</mat-label>
+            <mat-select required  formControlName="persona">
+                <mat-option *ngFor="let persona of personas " [value]="persona.idPersona.toString()">{{persona.codigo}} - {{persona.nombre}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+          
+      </div>
+
+      
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>Descripcion</mat-label>
+          <textarea required matInput placeholder="Consiste en..." formControlName="descripcion">
+            </textarea>
+      </mat-form-field>
+
+  
+      </div>
+
+      <div class="row">
+          
+          <mat-form-field appearance="outline">
+              <mat-label>Fecha Finalizacion</mat-label>
+              <input required matInput [matDatepicker]="picker" formControlName="fechaFinalizacion">
+              <mat-hint>DD/MM/YYYY</mat-hint>
+              <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+      </div>
+
+ 
+
+      <div class="row" *ngIf="data">
+        <mat-radio-group required aria-label="Select an option" formControlName="estado">
+            <mat-label><b>Estado</b></mat-label>
+            <mat-radio-button *ngFor="let estado of estados" [value]="estado.idEstado.toString()">{{estado.nombre}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+      
+  </div>
+  <div mat-dialog-actions class="action">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+      <button mat-raised-button color="primary" type="submit">{{data ? 'Actualizar': 'Agregar'}}</button>
+  </div>
+</form>

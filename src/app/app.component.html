@@ -1,0 +1,64 @@
+<mat-toolbar color="primary">
+  <span>Crud Tareas</span>
+  <span class="example-spacer"></span>
+  <button mat-raised-button (click)="openAddEditEmpForm()" color="accent">
+    ADD TASK
+  </button>
+</mat-toolbar>
+
+<div class="bootstrap-wrapper">
+
+  <mat-card-content >
+    <h4 for="filtroEstado" >Filtrar por Estado</h4>
+    <mat-form-field appearance="fill">
+      <mat-select  id="filtroEstado" [(ngModel)]="filtroEstado">
+        <mat-option value="">Todos</mat-option>
+        <mat-option *ngFor="let estado of estados" [value]="estado.idEstado">{{ estado.nombre }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </mat-card-content>
+
+
+  <div class="row content-center mt10">
+   <div class="col-md-4" *ngFor="let task of filtrarTareasPorEstado(filtroEstado); let i = index;">
+    <mat-card class="mt10" style=" overflow-y: auto; max-height: 260px;">
+      <mat-card-header class="mb10">
+        <mat-card-title>{{task.nombre}}</mat-card-title>
+        <mat-card-subtitle>{{task.descripcion}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class=""><strong>Persona:</strong> {{task.persona}}</p>
+        <p class=""><strong>Departamento:</strong> {{ task.departamento }}</p>
+        <p class=""><strong>Fecha Finalizacion:</strong> {{ task.fechaFinalizacion | date: 'dd/MM/yyyy' }}</p>
+        <p class=""><strong>Estado:  </strong> 
+          <mat-slide-toggle *ngIf="task.idEstado === '1'"
+          class="example-margin"
+          [color]="'primary'"
+          [checked]="false"
+          [disabled]="false">
+          Pendiente!
+      </mat-slide-toggle>
+      <mat-slide-toggle *ngIf="task.idEstado !== '1'"
+          class="example-margin"
+          [color]="'primary'"
+          [checked]="true"
+          [disabled]="false">
+          completada!
+      </mat-slide-toggle>
+        </p>
+        
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary" (click)="openEditForm(task)">
+          Editar
+        </button>
+        <button mat-raised-button color="warn" class="ml10" (click)="deleteTarea(task)">
+          Eliminar
+        </button>
+      </mat-card-actions>
+    </mat-card>
+   </div>
+   
+
+  </div>
+</div>
