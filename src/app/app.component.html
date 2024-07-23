@@ -1,3 +1,5 @@
+
+
 <mat-toolbar color="primary">
   <span>Crud Tareas</span>
   <span class="example-spacer"></span>
@@ -7,6 +9,7 @@
 </mat-toolbar>
 
 <div class="bootstrap-wrapper">
+  <div class="container">
 
   <mat-card-content >
     <h4 for="filtroEstado" >Filtrar por Estado</h4>
@@ -19,7 +22,7 @@
   </mat-card-content>
 
 
-  <div class="row content-center mt10">
+  <div class="row mt10">
    <div class="col-md-4" *ngFor="let task of filtrarTareasPorEstado(filtroEstado); let i = index;">
     <mat-card class="mt10" style=" overflow-y: auto; max-height: 260px;">
       <mat-card-header class="mb10">
@@ -61,4 +64,9 @@
    
 
   </div>
+
+  
 </div>
+
+</div>
+
